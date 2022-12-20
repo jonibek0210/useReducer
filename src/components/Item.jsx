@@ -4,7 +4,6 @@ import { useState } from "react";
 
 const Item = ({ id, title, time, deleteTask, editTask }) => {
    const [modal, setModal] = useState(false)
-   const [newTitle, setNewTitle] = useState("")
 
    return (
       <div className="flex flex-col items-center bg-white border rounded-lg shadow-md md:flex-row md:max-w-full hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
