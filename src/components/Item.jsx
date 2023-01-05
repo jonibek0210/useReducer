@@ -2,7 +2,7 @@ import Modal from "./children/Modal";
 
 import { useState } from "react";
 
-const Item = ({ id, title, time, deleteTask, editTask }) => {
+const Item = ({ id, title, time, dispatch }) => {
    const [modal, setModal] = useState(false)
 
    return (
@@ -13,17 +13,16 @@ const Item = ({ id, title, time, deleteTask, editTask }) => {
             <p className="font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology acquisitions of 2021 so far.</p>
             <p>{time}</p>
             <div className="w-full flex items-center justify-between">
-               <button onClick={e => deleteTask(id)} className="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-md px-5 py-2.5 text-center">delete</button>
+               <button onClick={() => dispatch({ type: "REMOVE", payload: id })} className="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-md px-5 py-2.5 text-center">delete</button>
                <button onClick={() => setModal(true)} className="text-white bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 shadow-lg shadow-lime-500/50 dark:shadow-lg dark:shadow-lime-800/80 font-medium rounded-lg text-md px-5 py-2.5 text-center">edit</button>
             </div>
          </div>
          {
             modal === true ?
-               <Modal closeModal={() => setModal(false)} />
+               <Modal closeModal={() => setModal(false)} id={id} dispatch={dispatch} />
                :
                null
          }
-
       </div>
    );
 }
